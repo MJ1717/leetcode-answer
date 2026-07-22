@@ -116,6 +116,132 @@ class Solution(object):
 
 
 
+from collections import deque
+class Solution(object):
+    def orangesRotting(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+        """
+
+        #1. call bfs on (top left)
+        #2. get neighbors
+           # getting neighbors need helper function
+          #  also return neighbors that are inside the matrix
+          #  rotten is visited
+        #3. if they are not visited, enqueue them into queue.
+
+        def under_bound(i, j):
+            if (i < 0 or j < 0 or i >= len(grid) or j >= len(grid[0])):
+                return False
+
+            if (grid[i][j] == 0):
+                return False
+
+            return True
+
+        def get_neighbors(i, j):
+            result = []
+
+            # left
+            if (under_bound(i, j-1)):
+                result.append([i, j-1])
+            
+            # right
+            if (under_bound(i, j+1)):
+                result.append([i, j+1])
+
+            # up
+            if (under_bound(i-1, j)):
+                result.append([i-1, j])
+
+            # down
+            if (under_bound(i+1, j)):
+                result.append([i+1, j])       
+
+            return result
+
+        def bfs(i, j):
+
+            while (queue):
+                current = queue.popleft()
+                i, j, time = current
+                grid[i][j] = 2
+                neighbors = get_neighbors(i, j)
+
+                for nbr in neighbors:
+                    a, b = nbr
+                    if (visited[a][b] == False):
+                        visited[a][b] = True
+                        queue.append([a, b, time + 1])
+
+                if (len(queue) == 0):
+                    return time
+
+        def find_rotten():
+            result = []
+            for i in range(len(grid)):
+                for j in range(len(grid[0])):
+                    if (grid[i][j] == 2):
+                        result.append([i,j])
+            return result
+
+        def no_fresh_orange():
+            result = True
+            for i in range(len(grid)):
+                for j in range(len(grid[0])):
+                    if (grid[i][j] == 1):
+                        return False
+            return result
+
+        no_fresh = no_fresh_orange()
+        if (no_fresh):
+           return 0
+
+        rottens = find_rotten()
+
+        if (len(rottens) == 0):
+            return -1
+
+        m = len(grid[0])
+        n = len(grid)
+        visited = [[False] * m for _ in range(n)]
+        queue = deque()
+        
+        for val in rottens:
+            i = val[0]
+            j = val[1]
+            queue.append([i, j, 0])
+            visited[i][j] = True
+            grid[i][j] = 2
+            
+        time = bfs(rottens[0][0], rottens[0][1])
+        there_is_fresh = False
+
+        for row in grid:
+            if 1 in row:
+                there_is_fresh = True
+                break
+
+        if (not there_is_fresh):
+            return time
+        else:
+            return -1
+
+                    
+
+
+
+
+
+        
+
+
+        
+
+
+
+
 
 
         
