@@ -70,6 +70,37 @@ class Solution(object):
 
 
 
+class Solution(object):
+    def decodeString(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+
+        num = 0
+        current = ""
+        stack = []
+
+        for val in s:
+            if (val.isdigit()):
+                num = num * 10 + int(val)
+            elif (val == "["):
+                stack.append([current, num])
+                num = 0
+                current = ""
+            elif (val == "]"):
+                old_val, old_num = stack.pop()
+                current = old_val + (old_num * current)
+            else:
+                current = current + val
+
+        return current
+
+        
+
+
+
+
 
             
 
