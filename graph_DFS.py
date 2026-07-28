@@ -86,6 +86,70 @@ class Solution(object):
 
 
 
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def oddEvenList(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+
+        # base case
+        if (head == None):
+            return None
+        
+        if (head.next == None):
+            return head
+
+        odd_list = head
+        even_list = head.next
+
+        odd_head = head
+        even_head = head.next
+
+        while (odd_list.next.next != None and even_list.next.next != None):
+            # update next list
+            odd_list.next = odd_list.next.next
+            even_list.next = even_list.next.next
+
+            # move
+            odd_list = odd_list.next
+            even_list = even_list.next
+
+        # left over
+        if (odd_list.next != None and odd_list.next.next != None):
+            odd_list.next = odd_list.next.next
+            odd_list = odd_list.next
+
+            even_list.next = None
+
+        if (even_list.next != None and even_list.next.next != None):
+            even_list.next = even_list.next.next
+            even_list = even_list.next
+
+            odd_list.next = None
+        
+        # add them
+        odd_list.next = even_head
+
+        return odd_head
+
+        
+     
+
+
+
+
+
+        
+        
+
+
+
 
 
 
