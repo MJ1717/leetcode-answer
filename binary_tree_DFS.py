@@ -56,7 +56,37 @@ class Solution(object):
 
         
         
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def goodNodes(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        
+        def bfs(node, maxx):
+            # base case
+            if (node is None):
+                return
+            
+            if (node.val >= maxx):
+                result.append(1)
+                maxx = node.val
 
+            bfs(node.left, maxx)
+            bfs(node.right, maxx)
+
+        maxx = float('-inf')
+        result = []
+
+        bfs(root, maxx)
+
+        return len(result)
         
         
 
