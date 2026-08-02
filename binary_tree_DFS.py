@@ -88,7 +88,44 @@ class Solution(object):
 
         return len(result)
         
-        
+        # Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def pathSum(self, root, targetSum):
+        """
+        :type root: Optional[TreeNode]
+        :type targetSum: int
+        :rtype: int
+        """
+        def bfs(node, remaining):
+            # base case
+            if (node is None):
+                return
 
+            # when there is value
+            next_remaining = []
 
+            for val in remaining:
+                current_left = val - node.val
+
+                if (current_left == 0):
+                    result.append(1)
+                
+                next_remaining.append(current_left)
+
+            next_remaining.append(target_sum)
+            
+            bfs(node.left, next_remaining)
+            bfs(node.right, next_remaining)
+
+        remaining = [targetSum]
+        result = []
+        target_sum = targetSum
+
+        bfs(root, remaining)
+        return len(result)
 
