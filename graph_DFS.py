@@ -139,7 +139,39 @@ class Solution(object):
         return odd_head
 
         
-     
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def longestZigZag(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: int
+        """
+
+        def dfs(node, visited, direction):
+            # base case
+            if (node is None):
+                return 1 + visited
+            
+            # recursive case
+            if (direction == "L"):
+                return max(dfs(node.right, 1 + visited, "R"), dfs(node.left, -1, "L"))
+            else:
+                return max(dfs(node.right, -1, "R"), dfs(node.left, 1 + visited, "L"))
+
+        # edge case
+        if (root is None):
+            return -1 
+
+        left_max = dfs(root.left, -1, "L")
+        right_max = dfs(root.right, -1, "R")
+
+        return max(left_max, right_max)
+        
 
 
 
