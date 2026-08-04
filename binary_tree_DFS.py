@@ -129,3 +129,62 @@ class Solution(object):
         bfs(root, remaining)
         return len(result)
 
+
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+
+        def dfs(node, array, target):
+            # base case
+            if (node is None):
+                return False
+            
+            array.append(node)
+
+            if (node is target):
+                return True
+            
+            if (dfs(node.left, array, target)):
+                return True
+
+            if (dfs(node.right, array, target)):
+                return True
+            
+            # up until here, there is no target element under
+            array.pop()
+            return False
+        
+        def last_common(ar1, ar2):
+            answer = -1
+
+            for a, b in zip(ar1, ar2):
+                if (a != b):
+                    break
+                answer = a
+
+            return answer
+
+        first_array = []
+        second_array = []
+        dfs(root, first_array, p)
+        dfs(root, second_array, q)
+
+        return last_common(first_array, second_array)
+        
+
+            
+
+        
