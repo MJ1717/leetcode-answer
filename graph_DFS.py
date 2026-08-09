@@ -174,7 +174,41 @@ class Solution(object):
         
 
 
+class Solution(object):
+    def minReorder(self, n, connections):
+        """
+        :type n: int
+        :type connections: List[List[int]]
+        :rtype: int
+        """
 
+        # make dict
+        graph = [ [] for _ in range(n) ]
+        for val in connections:
+            first, second = val
+            
+            graph[first].append([second, 1])
+            graph[second].append([first, 0])
+
+        # make visited array, num_change
+        visited = [False] * n
+        num_change = [0]
+
+        def dfs(node):
+            visited[node] = True
+
+            for values in graph[node]:
+                next_node, need_reverse = values
+
+                if (visited[next_node] == False):
+                    if (need_reverse == 1):
+                        num_change[0] += 1
+                    dfs(next_node)
+
+        dfs(0)
+
+        return num_change[0]
+                
 
 
         
