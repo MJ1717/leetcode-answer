@@ -208,6 +208,74 @@ class Solution(object):
         dfs(0)
 
         return num_change[0]
+
+
+class Solution(object):
+    def calcEquation(self, equations, values, queries):
+        """
+        :type equations: List[List[str]]
+        :type values: List[float]
+        :type queries: List[List[str]]
+        :rtype: List[float]
+        """
+
+        # creating dict, var : target_var, value (var / target_var), visited
+        d = {}
+        for i in range(len(equations)):
+            first, second = equations[i]
+
+            if first not in d:
+                d[first] = []
+            d[first].append([second, values[i], False])
+
+            if second not in d:
+                d[second] = []
+            d[second].append([first, 1 / values[i], False])
+
+        def dfs(current, target):
+            stack = [[current, 1.0]]
+
+            while (stack):
+                current_var, acc = stack.pop()
+
+                if (current_var not in d):
+                    continue
+
+                for i in range(len(d[current_var])):
+                    next_var, val, visited = d[current_var][i]
+                
+                    if (next_var == target):
+                        return acc * val
+
+                    if (visited == False):
+                        d[current_var][i][2] = True
+                        stack.append([next_var, acc * val])
+
+            # when we didnt find the path
+            return -1.0
+
+        def reset(d):
+            for key in d:
+                for i in range(len(d[key])):
+                    d[key][i][2] = False
+
+
+        result = []
+
+        for i in range(len(queries)):
+            first_var, second_var = queries[i]
+
+            answer = dfs(first_var, second_var)
+
+            result.append(answer)
+
+            reset(d)
+
+        return result
+
+            
+        
+        
                 
 
 
