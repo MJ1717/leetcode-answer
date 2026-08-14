@@ -84,3 +84,60 @@ class Solution:
 
         return maxx
 
+class Solution:
+    def totalCost(self, costs: List[int], k: int, candidates: int) -> int:
+
+        # edge case
+        if (len(costs) == 0):
+            return 0
+
+        result = 0
+
+        count_candidates = 0
+        count_k = 0
+
+        heap = [] #cost, index, side
+        left = 0
+        right = len(costs) - 1
+
+        # first set up
+        while (count_candidates < candidates and left <= right):
+            if (left == right):
+                heapq.heappush(heap, (costs[left], "left"))
+                left += 1
+                break
+
+            heapq.heappush(heap, (costs[left], "left"))
+            heapq.heappush(heap, (costs[right], "right"))
+
+            left += 1
+            right -= 1
+            count_candidates += 1
+
+        # ready to execute 
+        while (count_k < k and left <= right):
+            smallest_val, side = heapq.heappop(heap)
+            result += smallest_val
+
+            count_k += 1
+
+            if (side == "left"):
+                heapq.heappush(heap, (costs[left], "left"))
+                left += 1
+            elif (side == "right"):
+                heapq.heappush(heap, (costs[right], "right"))
+                right -= 1
+
+        # there is left over
+        if (count_k < k):
+            while (count_k < k):
+                smallest_val, side = heapq.heappop(heap)
+                result += smallest_val
+
+                count_k += 1
+
+        return result
+            
+
+
+
