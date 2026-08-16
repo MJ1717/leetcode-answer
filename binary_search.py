@@ -21,3 +21,31 @@ class Solution:
 
             else:
                 right = mid - 1
+
+
+class Solution:
+    def successfulPairs(self, spells: List[int], potions: List[int], success: int) -> List[int]:
+
+        sorted_potions = sorted(potions)
+        result = []
+
+        for i in range(len(spells)):
+            left = 0
+            right = len(potions) - 1
+            
+            spell_val = spells[i]
+
+            while (left <= right):
+                mid = (left + right) // 2
+                mid_value = sorted_potions[mid] * spell_val
+
+                if (mid_value >= success):
+                    right = mid - 1
+                else:
+                    left = mid + 1
+            
+            result.append(len(sorted_potions) - left)
+
+        return result
+
+      
