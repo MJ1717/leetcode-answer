@@ -48,4 +48,43 @@ class Solution:
 
         return result
 
+
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+
+        left = 0
+        right = len(nums) - 1
+
+        # edge case
+        if (len(nums) == 1):
+            return left
+        if (nums[left] > nums[left + 1]):
+            return left
+        if (nums[right] > nums[right - 1]):
+            return right
+
+        while (left <= right):
+            # base case
+            if (left == right):
+                return left
+
+            # recursive case
+            mid = (left + right) // 2
+            mid_value = nums[mid]
+
+            # if left is greater, meaning that there is local max on left
+            if (mid - 1 >= 0):
+                if (nums[mid - 1] > mid_value):
+                    right = mid - 1
+                    continue
+
+            # if right is greater, meaning that there is local max on right
+            if (mid + 1 <= len(nums) - 1):
+                if (nums[mid + 1] > mid_value):
+                    left = mid + 1
+                    continue
+
+            # when nothing is satisfied, current is max
+            return mid
+
       
