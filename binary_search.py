@@ -87,4 +87,37 @@ class Solution:
             # when nothing is satisfied, current is max
             return mid
 
+
+
+import math
+
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+
+        def hours_needed(array, banana_per_hour):
+            hours = 0
+
+            for val in array:
+                hours += math.ceil(val / banana_per_hour)
+
+            return hours
+
+        left = 1
+        right = max(piles)
+
+        while (left <= right):
+            # base case
+            if (left == right):
+                return left
+
+            mid = (left + right) // 2
+            hour_need = hours_needed(piles, mid)
+
+            if (hour_need <= h):
+                right = mid
+
+            else:
+                left = mid + 1
+
+
       
