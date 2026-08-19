@@ -26,3 +26,31 @@ class Solution:
         backtrack(0, [])
 
         return result
+
+
+
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]: 
+        array = [0,1,2,3,4,5,6,7,8,9]
+        result = []
+
+        def backtrack(index, path):
+            #base case
+            if (len(path) == k):
+                if (sum(path) == n):
+                    result.append(path[:])
+                return
+            if (index >= len(array)):
+                return
+
+            #include this index number
+            path.append(array[index])
+            backtrack(index + 1, path)
+
+            path.pop()
+
+            #not include this number
+            backtrack(index + 1, path)
+
+        backtrack(1, [])
+        return result
