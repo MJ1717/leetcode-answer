@@ -21,4 +21,27 @@ class Solution:
         return dp[-1]
 
 
+class Solution:
+    def findMinArrowShots(self, points: List[List[int]]) -> int:
+
+        points.sort(key = lambda i : i[0])
+
+        merge_count = 1
+        prev = points[0][1]
+
+        for i in range(1, len(points)):
+            start, end = points[i]
+
+            if (start <= prev):
+                prev = min(prev, end)
+
+            else:
+                prev = end
+                merge_count += 1
+
+        return merge_count
+
+
+
+
         
