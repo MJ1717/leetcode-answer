@@ -87,8 +87,52 @@ class Solution:
         return True
 
         
-
-
-
-                
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         
+        def traverse_right(row, start, end):
+            for i in range(start, end + 1):
+                result.append(matrix[row][i])
+
+        def traverse_left(row, start, end):
+            for i in range(start, end - 1, -1):
+                result.append(matrix[row][i])
+
+        def traverse_down(col, start, end):
+            for i in range(start, end + 1):
+                result.append(matrix[i][col])
+        
+        def traverse_up(col, start, end):
+            for i in range(start, end - 1, -1):
+                result.append(matrix[i][col])
+
+        result = []
+
+        far_up = 0
+        far_left = 0
+        far_right = len(matrix[0]) - 1
+        far_down = len(matrix) - 1
+
+        while (far_left <= far_right and far_up <= far_down):
+            traverse_right(far_up, far_left, far_right)
+            far_up += 1
+
+            if (far_left > far_right or far_up > far_down):
+                break
+
+            traverse_down(far_right, far_up, far_down)
+            far_right -= 1
+
+            if (far_left > far_right or far_up > far_down):
+                break
+
+            traverse_left(far_down, far_right, far_left)
+            far_down -= 1
+
+            if (far_left > far_right or far_up > far_down):
+                break
+
+            traverse_up(far_left, far_down, far_up)
+            far_left += 1
+
+        return result
