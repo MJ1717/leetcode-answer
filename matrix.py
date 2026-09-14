@@ -136,3 +136,25 @@ class Solution:
             far_left += 1
 
         return result
+
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+
+        col_len = len(matrix[0])
+
+        # transpose
+        for row in range(len(matrix)):
+            for col in range(row, col_len):
+                matrix[row][col], matrix[col][row] = matrix[col][row], matrix[row][col]
+
+        # left right mirror
+        for row in range(len(matrix)):
+            for col in (range(col_len // 2)):
+                matrix[row][col], matrix[row][(col_len - 1) - col] = matrix[row][(col_len - 1) - col], matrix[row][col]
+
+    
+        
