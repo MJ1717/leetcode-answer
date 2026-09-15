@@ -275,10 +275,35 @@ class Solution(object):
 
         return len(result)      
 
-      
 
-       
 
+class Solution:
+    def merge(self, nums1: list[int], m: int, nums2: list[int], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
         
+        remove_count = len(nums1) - m
+        count = 0
 
-    
+        while (count < remove_count): 
+            nums1.pop()
+            count += 1
+
+        p1 = 0
+        p2 = 0
+
+        while (p1 < m and p2 < n):
+            if (nums1[p1] > nums2[p2]):
+                nums1.insert(p1, nums2[p2])
+                
+                p1 += 1
+                p2 += 1
+                m += 1
+
+            else:
+                p1 += 1
+
+        # when p2 is left over
+        if (p2 < n):
+            nums1 += nums2[p2:]
