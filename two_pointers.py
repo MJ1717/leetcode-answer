@@ -116,5 +116,35 @@ class Solution(object):
 
 
 
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        s_list = list(s)
+
+        for i in range(len(s_list)):
+            if (s_list[i].isalnum()):
+                s_list[i] = s_list[i].lower()
+
+            else:
+                s_list[i] = ""
+
+        new_s = "".join(s_list)
+
+        front = 0
+        back = len(new_s) - 1
+
+        while (front < back):
+            front_char = new_s[front]
+            back_char = new_s[back]
+
+            if (front_char != back_char):
+                return False
+
+            front += 1
+            back -= 1
+
+        return True
+            
+        
+
 
 
