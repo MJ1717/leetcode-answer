@@ -121,6 +121,45 @@ class Solution(object):
         return maxx
 
 
+class Solution:
+    def minSubArrayLen(self, target: int, nums: list[int]) -> int:
+
+        left = 0
+        right = 0
+        current_sum = nums[0]
+        minn = float('inf')
+        found = False
+
+        while (right < len(nums)):
+
+            if (current_sum >= target):
+                found = True
+                minn = min(minn, right - left + 1)
+
+                current_sum = current_sum - nums[left]
+                left += 1
+
+            else:
+                right += 1
+
+                if (right < len(nums)):
+                    current_sum = current_sum + nums[right]
+
+        right -= 1
+
+        while (left < len(nums)):
+            if (current_sum < target):
+                break
+
+            else:
+                minn = min(minn, right - left + 1)
+                current_sum = current_sum - nums[left]
+                left += 1
+
+        if (not found):
+            return 0
+        return minn
+
 
 
 
