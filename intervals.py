@@ -42,6 +42,43 @@ class Solution:
         return merge_count
 
 
+class Solution:
+    def summaryRanges(self, nums: list[int]) -> list[str]:
+
+        if (len(nums) == 0):
+            return []
+
+        tmp = [[nums[0]]]
+        prev = nums[0]
+
+        for i in range(1, len(nums)):
+            val = nums[i]
+
+            if (val == (prev + 1)):
+                tmp[-1].append(val)
+            else:
+                tmp.append([val])
+
+            prev = val
+
+        result = []
+
+        for i in range(len(tmp)):
+            if (len(tmp[i]) != 1):
+                first_element = tmp[i][0]
+                last_element = tmp[i][-1]
+
+                string = str(first_element) + "->" + str(last_element)
+                result.append(string)
+
+            else:
+                first_element = tmp[i][0]
+                string = str(first_element)
+
+                result.append(string)
+
+        return result
 
 
+            
         
