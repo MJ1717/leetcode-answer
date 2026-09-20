@@ -105,7 +105,25 @@ class Solution(object):
         
         return count
 
+
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
         
+        d = {}
+
+        for val in magazine:
+            if (val not in d):
+                d[val] = 0
+
+            d[val] += 1
+
+        for val in ransomNote:
+            if (val not in d or d[val] == 0):
+                return False
+
+            d[val] -= 1
+            
+        return True
 
 
 
