@@ -97,7 +97,46 @@ class Solution(object):
         return current
 
         
+class Solution:
+    def isValid(self, s: str) -> bool:
 
+        def check_bracket(x, y):
+            if (x == "("):
+                if (y == ")"):
+                    return True
+                else:
+                    return False
+
+            if (x == "["):
+                if (y == "]"):
+                    return True
+                else:
+                    return False
+
+            if (x == "{"):
+                if (y == "}"):
+                    return True
+                else:
+                    return False
+
+        list_s = list(s)
+
+        stack = []
+
+        while (list_s):
+
+            list_s_pop = list_s.pop()
+
+            if (stack):
+                top_element = stack[-1]
+
+                if (check_bracket(list_s_pop, top_element)):
+                    stack.pop()
+                    continue
+
+            stack.append(list_s_pop)
+
+        return not stack
 
 
 
