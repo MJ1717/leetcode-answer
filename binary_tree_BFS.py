@@ -82,3 +82,39 @@ class Solution(object):
         #maxx_val = max(result)
         #maxx_index = result.index(maxx_val)
         return maxx_index + 1
+
+
+
+from collections import deque
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def averageOfLevels(self, root: TreeNode | None) -> list[float]:
+
+        q = deque()
+        q.append(root)
+        result = []
+
+        while (q):
+            total = 0
+            level_len = len(q)
+            for _ in range(level_len):
+                current = q.popleft()
+                total += current.val
+
+                if (current.left is not None):
+                    q.append(current.left)
+
+                if (current.right is not None):
+                    q.append(current.right)
+
+            result.append(total / level_len)
+
+        return result
+
+        
