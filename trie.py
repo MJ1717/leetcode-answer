@@ -117,9 +117,56 @@ class Solution:
         return returning
 
 
+class WordDictionary:
+
+    def __init__(self):
+        self.d = {}
+        
+
+    def addWord(self, word: str) -> None:
+        current = self.d
+        
+        for letter in word:
+            if (letter not in current):
+                current[letter] = {}
+
+            current = current[letter]
+
+        current["*"] = True
+
+        
+
+    def search(self, word: str) -> bool:
+        def inner_search(word, d):
+            current = d
+
+            for i in range(len(word)):
+                if (word[i] == "."):
+                    
+                    for key in current:
+                        if (key != "*"):
+                            if (inner_search(word[i+1:], current[key])):
+                                return True
+
+                    return False
+                
+                if (word[i] in current):
+                    current = current[word[i]]
+
+                else:
+                    return False
+
+            return "*" in current
+
+        return inner_search(word, self.d)
+
+        
 
 
-
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)
                     
 
 
