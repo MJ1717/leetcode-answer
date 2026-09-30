@@ -120,4 +120,27 @@ class Solution:
                 left = mid + 1
 
 
-      
+
+class Solution:
+    def searchInsert(self, nums: list[int], target: int) -> int:
+        
+        def binary_search(left, right):
+            mid_index = (left + right) // 2
+            mid_element = nums[mid_index]
+
+            # base case
+            if (left > right):
+                return left
+            if (target == mid_element):
+                return mid_index
+
+            # recursive step
+            if (mid_element > target):
+                result = binary_search(left, mid_index - 1)
+            else:
+                result = binary_search(mid_index + 1, right)
+
+            return result
+
+        return binary_search(0, len(nums) - 1)
+        
