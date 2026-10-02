@@ -140,4 +140,25 @@ class Solution:
             
 
 
+import heapq
 
+class Solution:
+    def kSmallestPairs(self, nums1: list[int], nums2: list[int], k: int) -> list[list[int]]:
+        result = []
+        heap = []
+
+        for i in range(min(len(nums1), k)):
+            total = nums1[i] + nums2[0]
+            heapq.heappush(heap, (total, i, 0))
+
+        while (len(result) < k):
+            total, i, j = heapq.heappop(heap)
+
+            result.append([nums1[i], nums2[j]])
+            
+            if (j + 1 < len(nums2)):
+                new_total = nums1[i] + nums2[j+1]
+
+                heapq.heappush(heap, (new_total, i, j+1))
+
+        return result
