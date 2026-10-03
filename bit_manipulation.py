@@ -57,4 +57,27 @@ class Solution:
         return count
             
 
-        
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        first = len(a) - 1
+        second = len(b) - 1
+
+        result = []
+        prev = 0
+
+        while (first >= 0 or second >= 0):
+            first_element = int(a[first]) if first >= 0 else 0
+            second_element = int(b[second]) if second >= 0 else 0
+
+            summ = first_element + second_element + prev
+
+            result.append(str(summ % 2))
+            prev = summ // 2
+
+            first -= 1
+            second -= 1
+
+        if (prev == 1):
+            result.append("1")
+
+        return "".join(reversed(result))
