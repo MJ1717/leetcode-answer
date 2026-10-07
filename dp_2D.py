@@ -94,3 +94,29 @@ class Solution:
 
         return dp[n][m]
 
+
+class Solution:
+    def minimumTotal(self, triangle: list[list[int]]) -> int:
+        dp = [0] * len(triangle)
+        count = 1
+        for i in range(len(dp)):
+            inner_dp = [0] * count
+            dp[i] = inner_dp
+            
+            count += 1
+
+        dp[0][0] = triangle[0][0]
+        for i in range(1, len(dp)):
+            for j in range(i+1):
+
+                adjacent = []
+
+                if (j > 0):
+                    adjacent.append(dp[i - 1][j - 1])
+
+                if (j < i):
+                    adjacent.append(dp[i - 1][j])
+
+                dp[i][j] = min(adjacent) + triangle[i][j]
+
+        return min(dp[-1])
