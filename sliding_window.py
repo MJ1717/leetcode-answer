@@ -161,9 +161,33 @@ class Solution:
         return minn
 
 
+from collections import deque
 
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if (len(s) == 0):
+            return 0
 
-        
+        seen = set()
+        seen.add(s[0])
+
+        maxx = 1
+        left = 0
+        right = 1
+
+        while (right < len(s)):
+            right_char = s[right]
+
+            if (right_char not in seen):
+                seen.add(right_char)
+                maxx = max(maxx, right - left + 1)
+                right += 1
+            
+            else:
+                seen.remove(s[left])
+                left += 1
+
+        return maxx    
    
 
 
