@@ -80,5 +80,25 @@ class Solution:
         return result
 
 
+class Solution:
+    def merge(self, intervals: list[list[int]]) -> list[list[int]]:
+
+        intervals.sort(key = lambda x : x[0])
+        result = []
+        result.append([intervals[0][0], intervals[0][1]])
+        prev_end = intervals[0][1]
+
+        for i in range(1, len(intervals)):
+            current_start = intervals[i][0]
+            current_end = intervals[i][1]
+
+            if (current_start <= prev_end):
+                longest = max(result[-1][1], current_end)
+                result[-1][1] = longest
+                prev_end = longest
             
-        
+            else:
+                result.append([current_start, current_end])
+                prev_end = current_end
+
+        return result   
