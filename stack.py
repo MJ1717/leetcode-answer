@@ -139,9 +139,38 @@ class Solution:
         return not stack
 
 
+class Solution:
+    def simplifyPath(self, path: str) -> str:
 
+        array = path.split("/")
+        while "" in array:
+            array.remove("")
 
-            
+        result = []
+        skip = 0
+
+        while array:
+            current = array.pop()
+
+            if (current == "."):
+                continue
+
+            elif (current == ".."):
+                skip += 1
+
+            elif (skip > 0):
+                skip -= 1
+
+            else:
+                result.append(current)
+                result.append("/")
+
+        if (not result):
+            return "/"
+
+        return "".join(reversed(result))
+
+                  
 
 
         
