@@ -134,7 +134,74 @@ class Solution:
         return False
         
 
-  
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: ListNode | None, l2: ListNode | None) -> ListNode | None:
+
+        result = []
+
+        current_1 = l1
+        current_2 = l2
+        prev = 0
+
+        while (current_1 is not None and current_2 is not None):
+            val1 = current_1.val
+            val2 = current_2.val
+
+            summ = val1 + val2 + prev
+            result.append(ListNode(summ % 10))
+
+            if (summ >= 10):
+                prev = 1
+            else:
+                prev = 0
+
+            current_1 = current_1.next
+            current_2 = current_2.next
+
+        # left over l1
+        while (current_1 is not None):
+            val1 = current_1.val
+
+            summ = val1 + prev
+            result.append(ListNode(summ % 10))
+
+            if (summ >= 10):
+                prev = 1
+            else:
+                prev = 0
+
+            current_1 = current_1.next
+
+        # left over l2
+        while (current_2 is not None):
+            val2 = current_2.val
+
+            summ = val2 + prev
+            result.append(ListNode(summ % 10))
+
+            if (summ >= 10):
+                prev = 1
+            else:
+                prev = 0
+
+            current_2 = current_2.next
+
+        if (prev == 1):
+            result.append(ListNode(1))
+
+        for i in range(len(result) - 1):
+            current = result[i]
+            current.next = result[i + 1]
+
+        return result[0]
+            
+
+
 
 
         
