@@ -47,5 +47,38 @@ class Solution:
         return True
 
 
+from collections import deque
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def invertTree(self, root: TreeNode | None) -> TreeNode | None:
+
+        if (root is None):
+            return None
+
+        queue = deque()
+        head = root
+        queue.append(root)
+
+        while (queue):
+            current = queue.popleft()
+
+            left_child = current.left
+            right_child = current.right
+
+            current.left = right_child
+            current.right = left_child
+
+            if (left_child is not None):
+                queue.append(left_child)
+            if (right_child is not None):
+                queue.append(right_child)
+        
+        return head
         
         
