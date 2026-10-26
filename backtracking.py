@@ -77,4 +77,30 @@ class Solution:
         return result
             
 
-        
+
+class Solution:
+    def permute(self, nums: list[int]) -> list[list[int]]:
+
+        result = []
+
+        def backtrack(path, choices):
+            
+            # base case
+            if (len(path) == len(nums)):
+                result.append(path.copy())
+                return
+            
+            for num in choices:
+
+                path.append(num)
+
+                new_choices = choices.copy()
+                new_choices.remove(num)
+                
+                backtrack(path, new_choices)
+
+                path.pop()
+
+        backtrack([], nums.copy())
+
+        return result
