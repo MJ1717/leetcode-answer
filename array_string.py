@@ -320,4 +320,18 @@ class Solution:
 
         return index
 
+
+
+class Solution:
+    def majorityElement(self, nums: list[int]) -> int:
+        d = {}
+
+        for val in nums:
+            if (val not in d):
+                d[val] = 0
+            d[val] += 1
+
+        for key in d:
+            if (d[key] > len(nums) // 2):
+                return key
         
