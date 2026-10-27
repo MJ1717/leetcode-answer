@@ -144,3 +144,44 @@ class Solution:
 
         return binary_search(0, len(nums) - 1)
         
+
+
+class Solution:
+    def searchMatrix(self, matrix: list[list[int]], target: int) -> bool:
+
+        left = 0
+        right = len(matrix) - 1
+
+        while (left <= right):
+            mid = (left + right) // 2
+
+            if (matrix[mid][0] <= target):
+                left = mid + 1
+
+            else:
+                right = mid - 1
+
+        row_index = left - 1
+
+        if (row_index < 0):
+            return False
+
+        row = matrix[row_index]
+        left = 0
+        right = len(row) - 1
+
+        while (left <= right):
+            mid = (left + right) // 2
+
+            if (row[mid] == target):
+                return True
+
+            elif (row[mid] <= target):
+                left = mid + 1
+            
+            else:
+                right = mid - 1
+
+        return False
+
+        
