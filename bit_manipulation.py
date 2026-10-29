@@ -81,3 +81,19 @@ class Solution:
             result.append("1")
 
         return "".join(reversed(result))
+
+
+
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        
+        result = 0
+
+        for i in range(32):
+            
+            bit = n % 2
+
+            result = result + (bit * (2 ** (31 - i)))
+            n = n // 2
+
+        return result        
