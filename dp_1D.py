@@ -103,3 +103,25 @@ class Solution:
 
         return dp[-1]
         
+
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: list[str]) -> bool:
+        
+        word = set(wordDict)
+
+        # dp[i] is true if s[:i] is true
+        dp = [False] * (len(s) + 1)
+
+        # empty string is always true
+        dp[0] = True
+
+        for i in range(1, len(s) + 1):
+            
+            for j in range(i):
+
+                if (dp[j] == True and s[j:i] in word):
+                    
+                    dp[i] = True
+
+        return dp[len(s)]
