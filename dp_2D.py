@@ -120,3 +120,34 @@ class Solution:
                 dp[i][j] = min(adjacent) + triangle[i][j]
 
         return min(dp[-1])
+
+
+
+class Solution:
+    def minPathSum(self, grid: list[list[int]]) -> int:
+        rows = len(grid)
+        cols = len(grid[0])
+
+        dp = [[False] * cols for _ in range(rows)]
+        
+        for i in range(rows):
+            for j in range(cols):
+
+                if (i == 0 and j == 0):
+                    dp[i][j] = grid[i][j]
+                    continue
+                
+                up_dp = float('inf')
+                left_dp = float('inf')
+
+                if (i - 1 >= 0):
+                    up_dp = dp[i - 1][j]
+
+                if (j - 1 >= 0):
+                    left_dp = dp[i][j - 1]
+
+                minn = min(up_dp, left_dp)
+
+                dp[i][j] = minn + grid[i][j]
+
+        return dp[-1][-1]
