@@ -334,4 +334,25 @@ class Solution:
         for key in d:
             if (d[key] > len(nums) // 2):
                 return key
+
+
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+
+        s = s.strip()
+
+        index = len(s) - 1
+        count = 0
+
+        while (index >= 0):
+
+            if (s[index] == " "):
+                return count
+
+            count += 1
+            index -= 1
+
+        return count
+
+        
         
