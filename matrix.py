@@ -206,4 +206,49 @@ class Solution:
         
 
 
+class Solution:
+    def gameOfLife(self, board: list[list[int]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+
+        rows = len(board)
+        cols = len(board[0])
+
+        directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1),  (1, 0),  (1, 1)]
+
+        for i in range(rows):
+            for j in range(cols):
+
+                live = 0
+
+                for dr, dc in directions:
+                    new_row = i + dr
+                    new_col = j + dc
+
+                    if (0 <= new_row < rows and 0 <= new_col < cols):
+                        if (board[new_row][new_col] in (1, 2)):
+                            live += 1
+
+                if (board[i][j] == 1):
+                    if (live < 2 or live > 3):
+                        # 2 is Alive -> Dead
+                        board[i][j] = 2
+
+                else:
+                    if (live == 3):
+                        # 3 is Dead -> Alive
+                        board[i][j] = 3
+
+        for i in range(rows):
+            for j in range(cols):
+
+                if (board[i][j] == 2):
+                    board[i][j] = 0
+
+                elif (board[i][j] == 3):
+                    board[i][j] = 1
+
+        return board
+
         
