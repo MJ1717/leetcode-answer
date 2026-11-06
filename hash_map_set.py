@@ -148,3 +148,34 @@ class Solution:
                 t_to_s[b] = a
 
         return True
+
+
+
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+
+        lst = s.split()
+        d = {}
+
+        if (len(pattern) != len(lst)):
+            return False
+
+        for i in range(len(pattern)):
+
+            current_letter = pattern[i]
+            current_word = lst[i]
+
+            if (current_letter not in d):
+
+                if (current_word in d.values()):
+                    return False
+
+                d[current_letter] = current_word
+                continue
+
+            if (current_word != d[current_letter]):
+                return False
+
+        return True
+
+                    
