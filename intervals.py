@@ -102,3 +102,37 @@ class Solution:
                 prev_end = current_end
 
         return result   
+
+
+
+class Solution:
+    def insert(self, intervals: list[list[int]], newInterval: list[int]) -> list[list[int]]:
+        new_start = newInterval[0]
+        new_end = newInterval[1]
+
+        result = []
+        inserted = False
+
+        for i in range(len(intervals)):
+
+            start = intervals[i][0]
+            end = intervals[i][1]
+
+            if (end < new_start):
+                result.append(intervals[i])
+
+            elif (start > new_end):
+                if (not inserted):
+                    result.append([new_start, new_end])
+                    inserted = True
+
+                result.append(intervals[i])
+
+            else:
+                new_start = min(new_start, start)
+                new_end = max(new_end, end)
+
+        if (not inserted):
+            result.append([new_start, new_end])
+
+        return result
