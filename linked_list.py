@@ -203,5 +203,56 @@ class Solution:
 
 
 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
+        
+        current1 = list1
+        current2 = list2
+
+        head = ListNode(0)
+        new = head
+
+        while (current1 is not None and current2 is not None):
+
+            if (current1.val < current2.val):
+                tmp = ListNode(current1.val)
+                new.next = tmp
+                new = tmp
+
+                current1 = current1.next
+
+            else:
+                tmp = ListNode(current2.val)
+                new.next = tmp
+                new = tmp
+
+                current2 = current2.next
+
+        while (current1 is not None):
+            tmp = ListNode(current1.val)
+            new.next = tmp
+            new = tmp
+
+            current1 = current1.next
+
+        while (current2 is not None):
+            tmp = ListNode(current2.val)
+            new.next = tmp
+            new = tmp
+
+            current2 = current2.next
+
+        return head.next
+
+
+
+        
+
+
 
         
