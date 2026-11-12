@@ -153,4 +153,50 @@ class Solution:
 
             return result
 
+
+
+
+from collections import deque
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def zigzagLevelOrder(self, root: TreeNode | None) -> list[list[int]]:
+
+        if (root is None):
+            return []
+        
+        queue = deque()
+        queue.append(root)
+        left = True
+        result = []
+
+        while (queue):
+            tmp = []
+            
+            for _ in range(len(queue)):
+                current = queue.popleft()
+
+                tmp.append(current.val)
+
+                if (current.left is not None):
+                    queue.append(current.left)
+
+
+                if (current.right is not None):
+                    queue.append(current.right)
+
+            if (not left):
+                tmp.reverse()
+
+            left = not left
+        
+            result.append(tmp)
+
+        return result
+
             
