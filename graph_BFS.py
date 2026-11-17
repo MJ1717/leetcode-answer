@@ -231,8 +231,33 @@ class Solution(object):
                     
 
 
+from collections import deque
 
+class Solution:
+    def minMutation(self, startGene: str, endGene: str, bank: list[str]) -> int:
 
+        bank = set(bank)
+        queue = deque()
+        queue.append([startGene, 0])
+        visited = set([startGene])
+
+        while (queue):
+            current, mutation = queue.popleft()
+
+            if (current == endGene):
+                return mutation
+
+            for i in range(len(current)):
+                for char in "ACGT":
+
+                    new_gene = current[:i] + char + current[i+1:]
+
+                    if (new_gene in bank and new_gene not in visited):
+                        visited.add(new_gene)
+                        queue.append([new_gene, mutation + 1])
+                        
+        return -1
+        
 
         
 
