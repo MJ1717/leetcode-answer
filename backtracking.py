@@ -104,3 +104,34 @@ class Solution:
         backtrack([], nums.copy())
 
         return result
+
+
+
+class Solution:
+    def combinationSum(self, candidates: list[int], target: int) -> list[list[int]]:
+
+        def backtrack(path, start):
+
+            summ = sum(path)
+
+            if (summ == target):
+                result.append(path[:])
+                return
+
+            if (summ > target):
+                return 
+
+            for i in range(start, len(candidates)):
+
+                path.append(candidates[i])
+
+                backtrack(path, i)
+
+                path.pop()
+
+        result = []
+        backtrack([], 0)
+
+        return result
+        
+        
