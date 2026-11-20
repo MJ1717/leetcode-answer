@@ -162,3 +162,32 @@ class Solution:
                 heapq.heappush(heap, (new_total, i, j+1))
 
         return result
+
+
+
+
+import heapq
+
+class Solution:
+    def findMaximizedCapital(self, k: int, w: int, profits: list[int], capital: list[int]) -> int:
+        
+        projects = sorted(zip(capital, profits))
+
+        max_heap = []
+        i = 0
+        n = len(projects)
+
+        for _ in range(k):
+
+            while (i < n and projects[i][0] <= w):
+
+                heapq.heappush_max(max_heap, projects[i][1])
+                i += 1
+
+            if (not max_heap):
+                break
+
+            w += heapq.heappop_max(max_heap)
+
+        return w
+
