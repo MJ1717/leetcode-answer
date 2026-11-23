@@ -32,3 +32,26 @@ class Solution:
 
         return tmp
 
+
+
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        
+        left = 0
+        right = x
+
+        while (left <= right):
+
+            mid = (left + right) // 2
+            root = mid * mid
+
+            if (root == x):
+                return mid
+
+            elif (root > x):
+                right = mid - 1
+
+            elif (root < x):
+                left = mid + 1
+
+        return right
