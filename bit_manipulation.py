@@ -97,3 +97,19 @@ class Solution:
             n = n // 2
 
         return result        
+
+
+
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        count = 0
+
+        while (n > 0):
+            
+            left_over = n % 2
+            n = n // 2
+
+            count += left_over
+
+        return count
+        
